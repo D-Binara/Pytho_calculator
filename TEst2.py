@@ -4,27 +4,11 @@ def enternum():
     global a
     global b
     special_characters = "$"
-    
-    a = input("Enter first number: ")
+
+    a = float(input("Enter first number: "))
     print(a)
-
-    if any(c in special_characters for c in a):
-        return -1
-    
-    if a =='#':
-        return -2
-
-    b = input("Enter second number: ")
+    b= float(input("Enter first number: "))
     print(b)
-
-    if any(c in special_characters for c in b):
-        return -1
-    
-    if b =='#':
-        return -2
-
-    a= float(a)
-    b= float(b)
 
 
 def history():
@@ -34,6 +18,14 @@ def history():
         for calculation in store:
             print(calculation)
 
+def reset():
+    if len(store)>0:
+        store.clear()
+        print("Reset all calculations.")
+    else:
+        print("Already reset.")
+
+
 
 def select_op(choice):
     global store
@@ -41,6 +33,9 @@ def select_op(choice):
         return -1
     elif choice =='?':
         history()
+    elif choice=="$":
+        reset()
+
     
     else:
         enternum_result = enternum()
@@ -68,11 +63,11 @@ def select_op(choice):
                 print(f"{a} / {b} = {a/b}")
                 store.append(f"{a} / {b} = {a/b}")
         elif choice =='^':
-            print(f"{a} ^ {b} = {a^b}")
-            store.append(f"{a} ^ {b} = {a^b}")
+            print(f"{a} ^ {b} = {a**b}")
+            store.append(f"{a} ^{b} = {a**b}")
         elif choice =='%':
             print(f"{a} % {b} = {a%b}")
-            store.append(f"{a} % {b} = {a%b}")
+            store.append(f"{a} % {b} = {a%b}")    
         else :
             print("Unrecognized operation")
         
@@ -92,6 +87,6 @@ while True:
   choice = input("Enter choice(+,-,*,/,^,%,#,$,?): ")
   print(choice)
   if(select_op(choice)  ==-1):
-    
+
     print("Done. Terminating")
     exit()
